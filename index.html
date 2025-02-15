@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Attendance Insights</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            color: var(--primary-dark);
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .insights {
+            margin-top: 2rem;
+        }
+
+        .insights-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .insights-header h2 {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem;
+            border-bottom: 4px solid var(--primary-dark);
+        }
+
+        .card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .chart-container {
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .chart-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.2s;
+        }
+
+        .chart-img:hover {
+            transform: scale(1.02);
+        }
+
+        .details {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+
+            .card-header h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1 class="nav-title">🍽️ Mess Insights Dashboard</h1>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Why We Analyzed Mess Attendance?</h2>
+            <p>Every day, thousands of students rely on college mess facilities for meals. Yet, fluctuating attendance leads to food wastage and overcrowding. This analysis aims to uncover patterns in student dining habits to optimize food planning and improve the mess experience.</p>
+        </section>
+
+        <section class="hero">
+            <h2>Understanding Student Engagement with Mess Facilities</h2>
+            <p>Efficient mess management is crucial for ensuring smooth dining experiences and reducing food waste. This analysis aims to identify peak meal times and meal-skipping trends across different study years, helping mess staff optimize food preparation schedules.</p>
+        </section>
+        
+        <section class="hero">
+            <h2>How We Collected the Data</h2>
+            <p>The dataset was gathered through Google Forms, where students self-reported their mess attendance habits. The survey included multiple-choice and time-based questions on meal timings, study year, and perceived crowd levels.</p>
+        </section>
+        
+        <section class="hero">
+            <h2>How We Prepared the Data for Analysis</h2>
+            <p>To ensure meaningful insights, we refined the dataset with structured preprocessing:</p>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>✔ Handling Missing Values:</strong> Removed incomplete responses for better accuracy.</li>
+                <li><strong>✔ Standardizing Time Formats:</strong> Converted meal timings into 15-minute intervals.</li>
+                <li><strong>✔ Encoding Categorical Variables:</strong> Transformed meal-skipping frequency and crowd levels into numerical values.</li>
+                <li><strong>✔ Removing Duplicates:</strong> Filtered out redundant responses for unique data entries.</li>
+            </ul>
+        </section>
+        
+        <section class="hero">
+            <h2>What's Inside the Dataset?</h2>
+            <p>With <strong>152 student responses</strong>, our dataset captures essential behavioral patterns related to mess attendance. Here’s an overview of the key attributes:</p>
+        
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                    <tr style="background-color: #007BFF; color: white; text-align: left;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">Feature Name</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Type</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Gender</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Categorical</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Identifies the student as Male or Female.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Mess Name</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Categorical</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Indicates the specific mess allocated to the student.</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Meal Skipping</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Categorical/Numeric</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Represents how frequently a student skips meals (Rarely, Sometimes, Often).</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Crowd Level</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Categorical/Numeric</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Students’ perceived crowd intensity in the mess during different meal times.</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Study Year</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Categorical</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Denotes the student's academic year (1st, 2nd, 3rd, Final).</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Meal Timings (Breakfast, Lunch, Dinner)</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Time Format</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Converted into 15-minute slots for structured analysis.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        
+        
+        <section class="insights">
+            <div class="insights-header">
+                <h2>Key Insights from Mess Data</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🍽️ Average Meal Preferences by Study Year</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <img src="images/average_meal_preferences.png" alt="Average Meal Preferences" class="chart-img">
+                        </div>
+                        <p class="details">This visualization reveals how meal preferences vary by academic year. Seniors might opt for fewer meals compared to freshmen due to off-campus commitments.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📊 Meal Skipping Patterns</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <img src="images/meal_skipping_patterns.png" alt="Meal Skipping Patterns" class="chart-img">
+                        </div>
+                        <p class="details">Meal skipping trends indicate peak and off-peak attendance. Understanding these patterns can help mess managers adjust meal preparations accordingly.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📦 Crowd Levels Distribution</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <img src="images/box_plot_crowd_levels.png" alt="Box Plots for Crowd Levels" class="chart-img">
+                        </div>
+                        <p class="details">Box plots highlight fluctuations in crowd levels at different times of the day, helping predict rush hours and plan better seating arrangements.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏠 Mess-wise Crowd Analysis</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <img src="images/average_crowd_by_mess.png" alt="Average Crowd Level by Mess" class="chart-img">
+                        </div>
+                        <p class="details">Comparing crowd levels across different mess halls offers insights into student preferences, helping redistribute resources effectively.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
